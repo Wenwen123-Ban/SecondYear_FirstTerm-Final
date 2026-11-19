@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lesson 6 - Cart Quantity Limits</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 24px; }
+    button { margin: 4px; padding: 8px 12px; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <h1>Cart Quantity</h1>
+  <p>Quantity: <strong id="quantity">0</strong> / 10</p>
+  <button data-change="1">Add to cart</button>
+  <button data-change="2">+2</button>
+  <button data-change="3">+3</button>
+  <button data-change="-1">Remove from cart</button>
+  <button data-change="-2">-2</button>
+  <button data-change="-3">-3</button>
+  <script>
+    // 6k-6l: Do not exceed 10 or reduce the quantity below zero.
+    let cartQuantity = 0;
+    const quantityDisplay = document.getElementById("quantity");
+
+    function changeCartQuantity(amount) {
+      const newQuantity = cartQuantity + amount;
+      if (newQuantity > 10) {
+        alert("The cart is full");
+        return;
+      }
+      if (newQuantity < 0) {
+        alert("Not enough items in the cart");
+        return;
+      }
+      cartQuantity = newQuantity;
+      quantityDisplay.textContent = cartQuantity;
+      console.log("Cart quantity:", cartQuantity);
+    }
+
+    document.querySelectorAll("[data-change]").forEach((button) => {
+      button.addEventListener("click", () => changeCartQuantity(Number(button.dataset.change)));
+    });
+  </script>
+</body>
+</html>

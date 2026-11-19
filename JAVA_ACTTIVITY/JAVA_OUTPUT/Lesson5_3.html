@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Calculator - Lesson 5l-5n</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 24px; }
+    #screen { min-height: 2em; padding: 8px; border: 1px solid #999; font-size: 1.5rem; }
+    button { min-width: 48px; min-height: 44px; margin: 3px; font-size: 1.2rem; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <h1>Calculator</h1>
+  <output id="screen" aria-live="polite"></output>
+  <p>
+    <button data-value="1">1</button>
+    <button data-value="2">2</button>
+    <button data-value="3">3</button>
+    <button data-value=" + ">+</button>
+    <button id="equals">=</button>
+  </p>
+  <script>
+    // 5l-5n: HTML structure, title, five buttons, and the calculation string.
+    let calculation = "";
+    const screen = document.getElementById("screen");
+
+    document.querySelectorAll("[data-value]").forEach((button) => {
+      button.addEventListener("click", () => {
+        calculation += button.dataset.value;
+        screen.textContent = calculation;
+        console.log(calculation);
+      });
+    });
+    document.getElementById("equals").addEventListener("click", () => {
+      try {
+        calculation = String(eval(calculation));
+        screen.textContent = calculation;
+        console.log(calculation);
+      } catch {
+        screen.textContent = "Invalid calculation";
+      }
+    });
+  </script>
+</body>
+</html>

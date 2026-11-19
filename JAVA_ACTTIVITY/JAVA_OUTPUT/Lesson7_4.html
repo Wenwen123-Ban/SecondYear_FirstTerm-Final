@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lesson 7 - Reusable Calculator and Cart Functions</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 24px; }
+    section { margin: 0 0 28px; }
+    .calculator { width: 280px; }
+    #screen { display: block; min-height: 2em; padding: 10px; border: 1px solid #999; text-align: right; font-size: 1.5rem; }
+    .row { display: flex; }
+    button { flex: 1; min-height: 42px; margin: 3px; font-size: 1rem; cursor: pointer; }
+    .cart button { flex: initial; padding: 8px 12px; }
+  </style>
+</head>
+<body>
+  <h1>Lesson 7: Reusable Functions</h1>
+  <section>
+    <h2>Calculator (7j)</h2>
+    <main class="calculator">
+      <output id="screen" aria-live="polite">0</output>
+      <div class="row">
+        <button data-value="7">7</button><button data-value="8">8</button><button data-value="9">9</button><button data-value=" / ">÷</button>
+      </div>
+      <div class="row">
+        <button data-value="4">4</button><button data-value="5">5</button><button data-value="6">6</button><button data-value=" * ">×</button>
+      </div>
+      <div class="row">
+        <button data-value="1">1</button><button data-value="2">2</button><button data-value="3">3</button><button data-value=" - ">−</button>
+      </div>
+      <div class="row">
+        <button data-value="0">0</button><button data-value=".">.</button><button id="equals">=</button><button data-value=" + ">+</button>
+      </div>
+      <button id="clear">Clear</button>
+    </main>
+  </section>
+  <section class="cart">
+    <h2>Cart Quantity (7k-7l)</h2>
+    <p>Quantity: <strong id="quantity">0</strong> / 10</p>
+    <button data-change="1">Add to cart</button>
+    <button data-change="2">+2</button>
+    <button data-change="3">+3</button>
+    <button data-change="-1">Remove from cart</button>
+    <button data-change="-2">-2</button>
+    <button data-change="-3">-3</button>
+  </section>
+  <script>
+    // 7j: Reuse one function for every calculator key.
+    let calculation = "";
+    const screen = document.getElementById("screen");
+
+    function updateCalculation(value) {
+      calculation += value;
+      screen.textContent = calculation || "0";
+      console.log(calculation);
+    }
+
+    document.querySelectorAll(".calculator [data-value]").forEach((button) => {
+      button.addEventListener("click", () => updateCalculation(button.dataset.value));
+    });
+    document.getElementById("equals").addEventListener("click", () => {
+      if (!calculation.trim()) return;
+      if (!/^[0-9+*/().\s-]+$/.test(calculation)) {
+        screen.textContent = "Invalid calculation";
+        calculation = "";
+        return;
+      }
+      try {
+        calculation = String(eval(calculation));
+        screen.textContent = calculation;
+        console.log(calculation);
+      } catch {
+        screen.textContent = "Invalid calculation";
+        calculation = "";
+      }
+    });
+    document.getElementById("clear").addEventListener("click", () => {
+      calculation = "";
+      screen.textContent = "0";
+    });
+
+    // 7k-7l: Reuse one cart function and return early when the new value is invalid.
+    let cartQuantity = 0;
+    const quantityDisplay = document.getElementById("quantity");
+
+    function updateCartQuantity(amount) {
+      const newQuantity = cartQuantity + amount;
+      if (newQuantity > 10) {
+        alert("The cart is full");
+        return;
+      }
+      if (newQuantity < 0) {
+        alert("Not enough items in the cart");
+        return;
+      }
+      cartQuantity = newQuantity;
+      quantityDisplay.textContent = cartQuantity;
+      console.log("Cart quantity:", cartQuantity);
+    }
+
+    document.querySelectorAll(".cart [data-change]").forEach((button) => {
+      button.addEventListener("click", () => updateCartQuantity(Number(button.dataset.change)));
+    });
+  </script>
+</body>
+</html>

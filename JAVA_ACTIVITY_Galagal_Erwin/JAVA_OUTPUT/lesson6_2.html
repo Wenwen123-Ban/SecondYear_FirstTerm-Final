@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lesson 6 - Age Discount</title>
+</head>
+<body>
+  <h1>Amusement Park Discount</h1>
+  <p>Open the browser console to see the age and holiday examples.</p>
+  <script>
+    // 6d: Children age 6 or younger and seniors age 65 or older qualify.
+    const age = 10; // Try 6, 65, or another age.
+    const qualifiesForDiscount = age <= 6 || age >= 65;
+    console.log(qualifiesForDiscount ? "Discount" : "No discount");
+
+    // 6e: A qualifying age gets a discount only when it is not a holiday.
+    const isHoliday = true; // Change to false to try both outcomes.
+    const getsDiscount = (age <= 6 || age >= 65) && !isHoliday;
+    console.log(getsDiscount ? "Discount" : "No discount");
+  </script>
+</body>
+</html>

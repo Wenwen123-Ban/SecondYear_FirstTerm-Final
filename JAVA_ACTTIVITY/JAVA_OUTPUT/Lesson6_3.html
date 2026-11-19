@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Coin Flip Game</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 24px; }
+    button { padding: 10px 16px; margin-right: 8px; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <h1>Coin Flip Guessing Game</h1>
+  <p>Pick heads or tails, then flip the coin.</p>
+  <button id="heads">Guess heads</button>
+  <button id="tails">Guess tails</button>
+  <button id="flip">Flip coin</button>
+  <p id="result" aria-live="polite"></p>
+  <script>
+    // 6f-6j: Random result, guess comparison, and a ternary-operator version.
+    let result = "";
+    let guess = "";
+    const resultText = document.getElementById("result");
+
+    document.getElementById("heads").addEventListener("click", () => { guess = "heads"; });
+    document.getElementById("tails").addEventListener("click", () => { guess = "tails"; });
+
+    document.getElementById("flip").addEventListener("click", () => {
+      const randomNumber = Math.random();
+      result = randomNumber < 0.5 ? "heads" : "tails";
+      const message = guess === result ? "You win!" : "You lose!";
+      resultText.textContent = "Result: " + result + (guess ? " — " + message : "");
+      console.log("Random number:", randomNumber, "Result:", result, "Guess:", guess, message);
+    });
+  </script>
+</body>
+</html>

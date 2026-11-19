@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lesson 6 - Booleans and If Statements</title>
+</head>
+<body>
+  <h1>Lesson 6: Booleans and If Statements</h1>
+  <p>Open the browser console to see exercises 6a-6c.</p>
+  <script>
+    // 6a: Use the current local hour in 24-hour format.
+    let hour = new Date().getHours();
+    const name = "Erwin Galagal";
+    let greeting;
+
+    if (hour >= 6 && hour <= 12) {
+      greeting = "Good morning";
+    } else if (hour >= 13 && hour <= 17) {
+      greeting = "Good afternoon";
+    } else {
+      greeting = "Good night";
+    }
+    // 6b: Change hour above to try other messages.
+    // 6c: Include the name in the selected greeting.
+    console.log(`${greeting} ${name}!`);
+  </script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lesson 5 - Cart Quantity</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 24px; }
+    button { margin: 4px; padding: 8px 12px; cursor: pointer; }
+    #quantity { font-size: 1.4rem; }
+  </style>
+</head>
+<body>
+  <h1>Cart Quantity</h1>
+  <p>Quantity: <strong id="quantity">0</strong></p>
+  <button data-change="1">Add to cart</button>
+  <button data-change="2">+2</button>
+  <button data-change="3">+3</button>
+  <button data-change="4">+4</button>
+  <button data-change="5">+5</button>
+  <button data-change="-1">Remove from cart</button>
+  <button data-change="-2">-2</button>
+  <button data-change="-3">-3</button>
+  <button id="reset">Reset cart</button>
+  <script>
+    let cartQuantity = 0;
+    const quantityDisplay = document.getElementById("quantity");
+
+    function updateDisplay() {
+      quantityDisplay.textContent = cartQuantity;
+      console.log("Cart quantity:", cartQuantity);
+    }
+
+    document.querySelectorAll("[data-change]").forEach((button) => {
+      button.addEventListener("click", () => {
+        cartQuantity += Number(button.dataset.change);
+        updateDisplay();
+      });
+    });
+    document.getElementById("reset").addEventListener("click", () => {
+      cartQuantity = 0;
+      updateDisplay();
+    });
+    console.log("Hello")
+  </script>
+</body>
+</html>

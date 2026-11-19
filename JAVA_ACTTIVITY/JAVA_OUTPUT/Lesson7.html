@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lesson 7 - Functions</title>
+</head>
+<body>
+  <h1>Lesson 7: Functions</h1>
+  <p>Open the browser console to see exercises 7a-7c.</p>
+  <script>
+    // 7a: Create and call a simple greeting function.
+    function greet() {
+      console.log("Hello!");
+    }
+    greet();
+    greet();
+    greet();
+
+    // 7b-7c: Accept a name, and handle a missing name.
+    function greetByName(name) {
+      if (!name) {
+        console.log("Hi there!");
+        return;
+      }
+      console.log(`Hello ${name}!`);
+    }
+    greetByName("Simon");
+    greetByName("Alex");
+    greetByName();
+  </script>
+</body>
+</html>
